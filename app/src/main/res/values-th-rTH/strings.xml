@@ -4,4 +4,19 @@
     <string name="Reserve">จอง</string>
     <string name="action_sign_in_short">เข้าสู่ระบบ</string>
     <string name="confirm_password">ยืนยันรหัสผ่าน</string>
+    <string name="create_account">สร้างบัญชีใหม่</string>
+    <string name="invalid_password">รหัสผ่านต้องมีมากกว่า 5 ตัวอักษรขึ้นไป</string>
+    <string name="invalid_username">ชื่อผู้ใช้งานไม่ถูกต้อง</string>
+    <string name="login_failed">เข้าสู่ระบบไม่สำเร็จ</string>
+    <string name="loginWithGoogle">เข้าสู่ระบบด้วย Google</string>
+    <string name="prompt_password">รหัสผ่าน</string>
+    <string name="register">ลงทะเบียน</string>
+    <string name="signup">สมัครสมาชิก</string>
+    <string name="title_activity_login">เข้าสู่ระบบ</string>
+    <string name="username">ชื่อผู้ใช้งาน</string>
+    <string name="welcome">ยินดีต้อนรับ !</string>
+    <string name="coming_up_reserve">รายการจองที่จะถึงนี้</string>
+    <string name="home">หน้าหลัก</string>
+    <string name="joining">ขอเข้าร่วม</string>
+    <string name="new_booking">จองโต๊ะใหม่</string>
 </resources>
