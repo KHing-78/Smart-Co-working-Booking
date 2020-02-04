@@ -13,6 +13,23 @@
     <string name="username">Username</string>
     <string name="confirm_password">Confirm Password</string>
 
+    <string name="coming_up_reserve">Coming up bookings</string>
+    <string name="home">Home</string>
+    <string name="new_booking">New bookings</string>
+    <string name="joining">Joining</string>
+    <string name="more">More...</string>
+
+    <string name="coe_coworking">CoE Co-Working Space, 5th floor</string>
+    <string name="date">1 February 2020, 18.00 - 20.00</string>
+    <string name="tableNo10">Table 10</string>
+    <string name="four_people">4 people</string>
+
+    <string name="booking_description">Booking description</string>
+    <string name="qr_scan_description">Please scan QR code on your reserved table before 15 minutes or your reservation would be canceled</string>
+    <string name="qr_scan">Scan QR Code to confirm your booking</string>
+    <string name="mapView">View on map</string>
+    <string name="cancelBooking">Cancel bookings</string>
+
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Username is invalid</string>
     <string name="invalid_password">Password must be more than 5 characters</string>
