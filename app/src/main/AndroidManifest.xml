@@ -9,16 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ShowTime"></activity>
-        <activity android:name=".joinPage" />
-        <activity android:name=".Map" />
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".ReservePage" />
         <activity android:name=".MainPage" />
         <activity android:name=".Login" />
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

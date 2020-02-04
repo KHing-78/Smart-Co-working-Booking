@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Smart Co-working Booking</string>
+    <string name="Reserve">จอง</string>
+    <string name="action_sign_in_short">เข้าสู่ระบบ</string>
+    <string name="confirm_password">ยืนยันรหัสผ่าน</string>
 </resources>
