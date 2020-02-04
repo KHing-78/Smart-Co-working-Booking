@@ -6,4 +6,5 @@
     <color name="backgroundSplashColor">#45B4BD</color>
     <color name="textColorSplash">#FCFCFC</color>
     <color name="backgroundRegisterColor">#75B7CD</color>
+    <color name="Green">#32CD32</color>
 </resources>
