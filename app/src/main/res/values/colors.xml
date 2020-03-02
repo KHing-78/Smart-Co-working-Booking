@@ -6,8 +6,11 @@
     <color name="backgroundSplashColor">#45B4BD</color>
     <color name="textColorSplash">#FCFCFC</color>
     <color name="backgroundRegisterColor">#75B7CD</color>
+
+    <color name="Green">#32CD32</color>
     <color name="textColor">#4D0A0A</color>
     <color name="new_booking_color">#F98F3D</color>
     <color name="joining_color">#75B7CD</color>
     <color name="background_current_booking">#F69494</color>
+
 </resources>

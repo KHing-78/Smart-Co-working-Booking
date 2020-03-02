@@ -36,4 +36,11 @@
     <string name="login_failed">"Login failed"</string>
     <string name="Reserve">"Reserve"</string>
 
+    <string name="CoE_CoS">CoE Co-working Space</string>
+    <string name="Free_Table_Status">Free 4 Table</string>
+    <string name="All_space">All space</string>
+    <string name="Table">Table 1</string>
+    <string name="People">0/4 people</string>
+    <string name="Resever">Resever</string>
+    <string name="Join">Join</string>
 </resources>
