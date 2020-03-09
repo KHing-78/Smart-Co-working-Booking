@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1031639526886",
+    "firebase_url": "https://smart-booking-project.firebaseio.com",
+    "project_id": "smart-booking-project",
+    "storage_bucket": "smart-booking-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031639526886:android:53897462db7a265cb07a27",
+        "android_client_info": {
+          "package_name": "com.onkasem.smartco_workingbooking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031639526886-u86r2orr90ap9407gh5vu30tb3ok13o1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.onkasem.smartco_workingbooking",
+            "certificate_hash": "1bab5175d36c62e46311e66b3be60e557113ce97"
+          }
+        },
+        {
+          "client_id": "1031639526886-84jln3qt4j5fdi5r6420pu23aslihruo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxaMWgRRB-UH3m-fUqUPum2x-ZHN-LJXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031639526886-84jln3qt4j5fdi5r6420pu23aslihruo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

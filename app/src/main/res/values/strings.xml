@@ -36,6 +36,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="Reserve">"Reserve"</string>
 
+    <string name="HomePage">Home</string>
     <string name="CoE_CoS">CoE Co-working Space</string>
     <string name="Free_Table_Status">Free 4 Table</string>
     <string name="All_space">All space</string>
