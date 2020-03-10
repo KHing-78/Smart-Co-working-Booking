@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_dash_board.*
+import org.jetbrains.anko.doAsync
+import java.util.concurrent.Delayed
 
 class DashBoard : AppCompatActivity() {
     var bAdapter : BookAdepter? = null
@@ -27,11 +29,14 @@ class DashBoard : AppCompatActivity() {
     }
 
     fun getData () {
-        mDb.collection("Table description").get().addOnSuccessListener { documents ->
+
+        mDb.collection("Place").get().addOnSuccessListener { documents ->
             Log.d("TEST", "${documents.size()}")
             for (document in documents) {
                 Log.d("TEST", "${document.id} => ${document.data}")
+
                 val book = document.toObject(Booking::class.java)
+
                 Log.wtf("test" , book.toString())
                 books.add(book)
             }

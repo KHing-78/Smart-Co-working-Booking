@@ -17,14 +17,14 @@ class SplashPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        mAuth = FirebaseAuth.getInstance()
-
-
+        fun signOut(){
+            mAuth = FirebaseAuth.getInstance()
+            mAuth!!.signOut()
+        }
+        
         Handler().postDelayed({
             // This method will be executed once the timer is over
             // Start your app main activity
-
-            mAuth!!.signOut()
 
             startActivity(Intent(this,Login::class.java))
 

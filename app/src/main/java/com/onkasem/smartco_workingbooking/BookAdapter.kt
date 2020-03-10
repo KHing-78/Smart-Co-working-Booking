@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.booking_list.view.*
+import org.jetbrains.anko.custom.async
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,9 +24,9 @@ class BookAdepter(val bookList: ArrayList<Booking>) : RecyclerView.Adapter<BookA
         fun bind(booking: Booking) {
             itemView.apply {
                 try{
-                    itemView.place_header.text = booking.name_place
-                    itemView.place_discription.text = booking.discription
-                    itemView.time.text = booking.booking_time.toDate().toString()
+                    itemView.place_header.text = booking.place_name
+                    itemView.place_discription.text = "Table: ${booking.Table_num.toString()}"
+                    itemView.freeTableStatus.text = "Free/All: ${booking.free} / ${booking.all}"
                 }catch (e:Exception){
                     Log.wtf("test" , e)
                 }
@@ -40,6 +41,8 @@ class BookAdepter(val bookList: ArrayList<Booking>) : RecyclerView.Adapter<BookA
     override fun getItemCount() = bookList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        bookList.sortWith(compareBy({it.place_name}, {it.Table_num}))
+        Log.d("booklist",bookList.toString())
         holder.bind(bookList[position])
     }
 
