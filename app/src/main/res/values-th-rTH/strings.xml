@@ -19,4 +19,12 @@
     <string name="home">หน้าหลัก</string>
     <string name="joining">ขอเข้าร่วม</string>
     <string name="new_booking">จองโต๊ะใหม่</string>
+    <string name="prompt_email">อีเมลล์</string>
+    <string name="action_sign_in">เข้าสู่ระบบหรือลงทะเบียน</string>
+    <string name="more">เพิ่มเติม...</string>
+    <string name="mapView">ดูบนแผนที่</string>
+    <string name="cancelBooking">ยกเลิกการจอง</string>
+    <string name="HomePage">หน้าหลัก</string>
+    <string name="Resever">จอง</string>
+    <string name="Join">เข้าร่วม</string>
 </resources>
