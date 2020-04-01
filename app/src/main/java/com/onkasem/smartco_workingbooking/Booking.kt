@@ -9,6 +9,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Booking (
+    var id : String? = "",
     var place_name: String? = "",
     var Table_num: Int = 0,
     var free: Int = 0,

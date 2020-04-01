@@ -56,14 +56,13 @@ class Table_Booking : AppCompatActivity() {
         }
 
         val placeBook = intent.getParcelableExtra<Booking>(DashBoard.INTENT_PARCELABLE)
-//        val documentId = intent.getParcelableArrayExtra(DashBoard.INTENT_PARCELABLE)
         val place_name = findViewById<TextView>(R.id.place_name)
         val TableOrder = findViewById<TextView>(R.id.TableOrder)
 
         place_name.text = placeBook.place_name
         TableOrder.text = placeBook.Table_num.toString()
 
-//        Log.wtf("documentId" , documentId.toString())
+        Log.d("documentId" , placeBook.id)
 
     }
 

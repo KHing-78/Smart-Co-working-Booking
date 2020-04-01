@@ -46,16 +46,16 @@ class DashBoard : AppCompatActivity() {
                 Log.d("TEST", "${document.id} => ${document.data}")
 
                 val book = document.toObject(Booking::class.java)
-
+                book.id = document.id
                 Log.wtf("test" , book.toString())
                 books.add(book)
 
                 mainRecycleView.adapter = BookAdepter(this, books){
                     val intent = Intent(this, Table_Booking::class.java)
+
                     intent.putExtra(INTENT_PARCELABLE, it)
                     startActivity(intent)
                     toast("click")
-                    Log.d("testBook", it.toString() + document.id)
                 }
             }
             mainRecycleView.layoutManager = LinearLayoutManager(this)
