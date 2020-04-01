@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundRegisterColor"
-    tools:context=".Register">
+    tools:context=".Register"
+    style="@style/AppTheme.NoActionBar"
+    >
 
 
     <TextView
@@ -67,11 +69,11 @@
         android:layout_marginRight="16dp"
         android:ems="10"
         android:hint="@string/prompt_password"
-        android:textColor="@color/textColorSplash"
         android:inputType="textPassword"
+        android:textColor="@color/textColorSplash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/emailRegister" />
 
     <EditText
         android:id="@+id/confirmPasswordRegister"
@@ -105,7 +107,7 @@
         android:textColor="@color/textColorSplash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameRegister" />
 
     <Button
         android:id="@+id/registerButton"
@@ -113,11 +115,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="@string/register"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordRegister" />
 </androidx.constraintlayout.widget.ConstraintLayout>

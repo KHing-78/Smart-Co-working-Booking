@@ -1,13 +1,17 @@
 package com.onkasem.smartco_workingbooking
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_dash_board.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 import java.util.concurrent.Delayed
 
 class DashBoard : AppCompatActivity() {
@@ -16,6 +20,12 @@ class DashBoard : AppCompatActivity() {
     lateinit var mDb: FirebaseFirestore
 
     lateinit var books: ArrayList<Booking>
+
+    lateinit var documentId: String
+
+    companion object{
+        val INTENT_PARCELABLE = "OBJECT_INTENT"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +49,19 @@ class DashBoard : AppCompatActivity() {
 
                 Log.wtf("test" , book.toString())
                 books.add(book)
+
+                mainRecycleView.adapter = BookAdepter(this, books){
+                    val intent = Intent(this, Table_Booking::class.java)
+                    intent.putExtra(INTENT_PARCELABLE, it)
+                    startActivity(intent)
+                    toast("click")
+                    Log.d("testBook", it.toString() + document.id)
+                }
             }
             mainRecycleView.layoutManager = LinearLayoutManager(this)
-            bAdapter = BookAdepter(books)
-            mainRecycleView.adapter = bAdapter
+
         }.addOnFailureListener { task->
-            Log.d("test", task.message)
+            Log.d("testTask", task.message)
         }
     }
-
 }

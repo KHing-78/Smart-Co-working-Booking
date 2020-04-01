@@ -1,18 +1,17 @@
 package com.onkasem.smartco_workingbooking
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.booking_list.view.*
-import org.jetbrains.anko.custom.async
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
-class BookAdepter(val bookList: ArrayList<Booking>) : RecyclerView.Adapter<BookAdepter.ViewHolder>() {
+class BookAdepter(private val context: Context
+                  , val bookList: ArrayList<Booking>
+                  ,val listener:(Booking) -> Unit) : RecyclerView.Adapter<BookAdepter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(parent.context)
@@ -21,7 +20,7 @@ class BookAdepter(val bookList: ArrayList<Booking>) : RecyclerView.Adapter<BookA
     }
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
-        fun bind(booking: Booking) {
+        fun bind(booking: Booking, listener: (Booking) -> Unit) {
             itemView.apply {
                 try{
                     itemView.place_header.text = booking.place_name
@@ -31,6 +30,7 @@ class BookAdepter(val bookList: ArrayList<Booking>) : RecyclerView.Adapter<BookA
                     Log.wtf("test" , e)
                 }
             }
+            itemView.setOnClickListener { listener(booking) }
         }
     }
 
@@ -43,7 +43,7 @@ class BookAdepter(val bookList: ArrayList<Booking>) : RecyclerView.Adapter<BookA
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         bookList.sortWith(compareBy({it.place_name}, {it.Table_num}))
         Log.d("booklist",bookList.toString())
-        holder.bind(bookList[position])
-    }
+        holder.bind(bookList[position], listener)
 
+        }
 }
