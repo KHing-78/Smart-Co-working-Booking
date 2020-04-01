@@ -4,10 +4,8 @@ import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.TimePicker
+import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.FragmentActivity
@@ -17,6 +15,8 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.onkasem.smartco_workingbooking.DashBoard.Companion.INTENT_PARCELABLE
+import kotlinx.android.synthetic.main.activity_booking_description.*
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
@@ -25,6 +25,7 @@ class Table_Booking : AppCompatActivity() {
 
     lateinit var db: FirebaseFirestore
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_table__booking)
@@ -36,23 +37,40 @@ class Table_Booking : AppCompatActivity() {
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
-
-        val localDate: TextView = findViewById(R.id.Localdate)
+        val localDate: TextView = findViewById(R.id.localDate)
 
         val person : EditText = findViewById(R.id.edit_peopleCount)
         val joinButt : Button = findViewById(R.id.join_switch)
         val time : TimePicker = findViewById(R.id.timePicker1)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val date: LocalDate = LocalDate.now()
-            localDate.setText("$date")
+        val cancelButton : Button = findViewById(R.id.CancelBtn)
+        val confirmButton : Button = findViewById(R.id.ConfirmBtn)
+
+
+        val date = getCurrentDateTime()
+        val dateInString = date.toString("yyyy/MM/dd")
+        localDate.setText(dateInString)
 
             ShowDateLocal.setOnClickListener {
-                val bookingDateDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                    localDate.setText("${year}-${month+1}-${dayOfMonth}")
-                }, year, month, day)
+                val bookingDateDialog = DatePickerDialog(
+                    this,
+                    DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                        localDate.setText("${year}/${month + 1}/${dayOfMonth}")
+                    },
+                    year,
+                    month,
+                    day
+                )
                 bookingDateDialog.show()
             }
+        val hourSelectDropdown : Spinner = findViewById(R.id.hourSelectDropdown)
+        var selectedHours : Int = 0
+        val amountHourString : String = hourSelectDropdown.onItemSelectedListener.toString()
+        selectedHours = when (amountHourString) {
+            "1" -> 1
+            "2" -> 2
+            "3" -> 3
+            else -> 0
         }
 
         val placeBook = intent.getParcelableExtra<Booking>(DashBoard.INTENT_PARCELABLE)
@@ -63,6 +81,15 @@ class Table_Booking : AppCompatActivity() {
         TableOrder.text = placeBook.Table_num.toString()
 
         Log.d("documentId" , placeBook.id)
+
+        cancelButton.setOnClickListener{
+
+        }
+        confirmButton.setOnClickListener {
+
+        }
+
+
 
     }
 
@@ -80,5 +107,14 @@ class Table_Booking : AppCompatActivity() {
         docRef.update(updates).addOnCompleteListener { }
 
     }
+    private fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
+        val formatter = SimpleDateFormat(format, locale)
+        return formatter.format(this)
+    }
+
+    private fun getCurrentDateTime(): Date {
+        return Calendar.getInstance().time
+    }
+
 
 }

@@ -62,6 +62,23 @@
         app:layout_constraintTop_toBottomOf="@+id/TableOrder" />
 
     <Button
+        android:id="@+id/ConfirmBtn"
+        style="@style/confirmBth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="confirm"
+        app:layout_constraintBottom_toBottomOf="@+id/CancelBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/CancelBtn"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
         android:id="@+id/CancelBtn"
         style="@style/cancelBth"
         android:layout_width="wrap_content"
@@ -78,23 +95,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/ConfirmBth"
-        style="@style/confirmBth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:text="confirm"
-        app:layout_constraintBottom_toBottomOf="@+id/CancelBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/CancelBtn" />
+        app:layout_constraintVertical_bias="0.322" />
 
     <Switch
         android:id="@+id/join_switch"
@@ -132,7 +133,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/Localdate"
+                android:id="@+id/localDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -144,7 +145,7 @@
                 android:gravity="center_horizontal"
                 android:text="Local Date"
                 android:textAlignment="center"
-                android:textSize="50sp"
+                android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -185,6 +186,37 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <Spinner
+        android:id="@+id/hourSelectDropdown"
+        android:layout_width="183dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/ConfirmBtn"
+        android:prompt="@string/choose_hour_prompt"
+        android:entries="@array/hours_array"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.413" />
+
+    <TextView
+        android:id="@+id/hoursDes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="18sp"
+        android:text="@string/choose_hour_prompt"
+        app:layout_constraintBottom_toTopOf="@+id/CancelBtn"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
