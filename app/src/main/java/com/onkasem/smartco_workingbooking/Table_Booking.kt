@@ -9,27 +9,24 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.FragmentActivity
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FieldValue
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
-import com.onkasem.smartco_workingbooking.DashBoard.Companion.INTENT_PARCELABLE
 import org.jetbrains.anko.toast
-import kotlinx.android.synthetic.main.activity_booking_description.*
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 
 class Table_Booking : AppCompatActivity() {
 
     lateinit var db: FirebaseFirestore
+    lateinit var  addBooking: ArrayList<ShowTime>
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_table__booking)
+
+
 
         val db = FirebaseFirestore.getInstance()
 
@@ -79,26 +76,28 @@ class Table_Booking : AppCompatActivity() {
         val TableOrder = findViewById<TextView>(R.id.TableOrder)
 
         place_name.text = placeBook.place_name
-        TableOrder.text = placeBook.Table_num.toString()
+        TableOrder.text = "Table: ${placeBook.Table_num.toString()}"
 
         Log.d("documentId", "55555555555555" + placeBook.id)
 
-        //confiram Butt
+//        addBooking.add(ShowTime("","",selectedHours,
+//            Timestamp(year,month),person.text.toString().toInt(),placeBook.Table_num.toString()))
 
+        //confiram Butt
         confirmButton.setOnClickListener {
             // If you're using custom Kotlin objects in Android, add an @ServerTimestamp
             // annotation to a Date field for your custom object classes. This indicates
             // that the Date field should be treated as a server timestamp by the object mapper.
-            val docRef = db.collection("Place").document("${placeBook.id}")
-            if (person.text.toString().toInt() <= placeBook.all) {
-                docRef.update("free", person.text.toString().toInt())
-
-            } else {
-                toast("Please enter in range")
-            }
+            val docRef = db.collection("Coe_coworking_space")
+            docRef.add(addBooking).addOnSuccessListener { documentReference ->
+                    Log.d("TableBooking", "DocumentSnapshot added with ID: " + documentReference.id)
+                }
+                .addOnFailureListener { e ->
+                    Log.w("TableBooking", "Error adding document", e)
+                }
 
             cancelButton.setOnClickListener {
-
+                toast("Booking is cancel")
             }
 
         }
