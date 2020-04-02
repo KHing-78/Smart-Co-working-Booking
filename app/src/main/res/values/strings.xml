@@ -46,6 +46,7 @@
     <string name="Join">Join</string>
 
     <string name="choose_hour_prompt">Select amount of hours</string>
+    <string name="nowBooking">nowBooking</string>
     <string-array name="hours_array">
         <item>1</item>
         <item>2</item>

@@ -16,13 +16,10 @@ import org.jetbrains.anko.toast
 import java.util.concurrent.Delayed
 
 class DashBoard : AppCompatActivity() {
-    var bAdapter : BookAdepter? = null
 
     lateinit var mDb: FirebaseFirestore
 
     lateinit var books: ArrayList<Booking>
-
-    lateinit var documentId: String
 
     companion object{
         val INTENT_PARCELABLE = "OBJECT_INTENT"
@@ -34,18 +31,8 @@ class DashBoard : AppCompatActivity() {
 
         mDb = FirebaseFirestore.getInstance()
         books = ArrayList()
-        getData()
         val actionBar = supportActionBar
         actionBar!!.title = "Home"
-        
-    }
-
-    fun pageUpdate(m:ArrayList<Booking>){
-        val placeList = m
-        bAdapter!!.notifyDataSetChanged()
-    }
-
-    fun getData () {
 
         mDb.collection("Place").get().addOnSuccessListener { documents ->
             Log.d("TEST", "${documents.size()}")
@@ -57,19 +44,22 @@ class DashBoard : AppCompatActivity() {
                 Log.wtf("test" , book.toString())
                 books.add(book)
 
-                mainRecycleView.adapter = BookAdepter(this, books){
-                    val intent = Intent(this, Table_Booking::class.java)
+                mainRecycleView.adapter = BookAdapter(this, books){
+                    val intent = Intent(this, tableBookingTime::class.java)
 
                     intent.putExtra(INTENT_PARCELABLE, it)
                     startActivity(intent)
                     toast("click")
                 }
+
+
             }
             mainRecycleView.layoutManager = LinearLayoutManager(this)
 
         }.addOnFailureListener { task->
             Log.d("testTask", task.message)
         }
+        
     }
 
 }
