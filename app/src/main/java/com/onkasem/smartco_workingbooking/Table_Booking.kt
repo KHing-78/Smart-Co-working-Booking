@@ -84,10 +84,8 @@ class Table_Booking : AppCompatActivity() {
         Log.d("documentId", "55555555555555" + placeBook.id)
 
         //confiram Butt
-        val confirmBth: Button = findViewById(R.id.ConfirmBtn)
-        val cancelBtn: Button = findViewById(R.id.CancelBtn)
 
-        confirmBth.setOnClickListener {
+        confirmButton.setOnClickListener {
             // If you're using custom Kotlin objects in Android, add an @ServerTimestamp
             // annotation to a Date field for your custom object classes. This indicates
             // that the Date field should be treated as a server timestamp by the object mapper.

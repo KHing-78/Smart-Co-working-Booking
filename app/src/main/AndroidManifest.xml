@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Table_Booking_View"></activity>
-        <activity android:name=".Table_Booking"></activity>
+        <activity android:name=".tableBookingTime"></activity>
+        <activity android:name=".Table_Booking" />
         <activity
             android:name=".SplashPage"
             android:theme="@style/AppTheme.NoActionBar">
@@ -26,7 +26,7 @@
         <activity android:name=".MainPage" />
         <activity android:name=".Login" />
         <activity android:name=".Register" />
-        <activity android:name=".DashBoard"></activity>
+        <activity android:name=".DashBoard" />
     </application>
 
 </manifest>

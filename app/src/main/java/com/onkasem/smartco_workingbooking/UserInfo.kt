@@ -15,19 +15,20 @@ class UserInfo : AppCompatActivity() {
         setContentView(R.layout.activity_user_info)
 
         mUser = FirebaseAuth.getInstance()
-        getUser()
+//        getUser()
         val displayName : TextView = findViewById(R.id.displayName)
         val displayEmail : TextView = findViewById(R.id.displayEmail)
         //displayName.text(userName)
         //displayEmail.text(email)
 
     }
-    private fun getUser(): String? {
-        var currentUser = mUser.currentUser
-        currentUser?.let{
-            val userName = currentUser.displayName
-            val email = currentUser.email
-            val uid = currentUser.uid
-        }
-    }
+//    private fun getUser() {
+//        var currentUser = mUser.currentUser
+//        currentUser?.let{
+//            val userName = currentUser.displayName
+//            val email = currentUser.email
+//            val uid = currentUser.uid
+//        }
+//        return
+//    }
 }
