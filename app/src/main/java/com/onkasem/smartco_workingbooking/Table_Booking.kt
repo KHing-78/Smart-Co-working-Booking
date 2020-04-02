@@ -15,6 +15,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.onkasem.smartco_workingbooking.DashBoard.Companion.INTENT_PARCELABLE
+import org.jetbrains.anko.toast
 import kotlinx.android.synthetic.main.activity_booking_description.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -32,40 +33,40 @@ class Table_Booking : AppCompatActivity() {
 
         val db = FirebaseFirestore.getInstance()
 
-        val ShowDateLocal : CardView = findViewById(R.id.ShowDateCard)
+        val ShowDateLocal: CardView = findViewById(R.id.ShowDateCard)
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
         val localDate: TextView = findViewById(R.id.localDate)
 
-        val person : EditText = findViewById(R.id.edit_peopleCount)
-        val joinButt : Button = findViewById(R.id.join_switch)
-        val time : TimePicker = findViewById(R.id.timePicker1)
+        val person: EditText = findViewById(R.id.edit_peopleCount)
+        val joinButt: Button = findViewById(R.id.join_switch)
+        val time: TimePicker = findViewById(R.id.timePicker1)
 
-        val cancelButton : Button = findViewById(R.id.CancelBtn)
-        val confirmButton : Button = findViewById(R.id.ConfirmBtn)
+        val cancelButton: Button = findViewById(R.id.CancelBtn)
+        val confirmButton: Button = findViewById(R.id.ConfirmBtn)
 
 
         val date = getCurrentDateTime()
         val dateInString = date.toString("yyyy/MM/dd")
         localDate.setText(dateInString)
 
-            ShowDateLocal.setOnClickListener {
-                val bookingDateDialog = DatePickerDialog(
-                    this,
-                    DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                        localDate.setText("${year}/${month + 1}/${dayOfMonth}")
-                    },
-                    year,
-                    month,
-                    day
-                )
-                bookingDateDialog.show()
-            }
-        val hourSelectDropdown : Spinner = findViewById(R.id.hourSelectDropdown)
-        var selectedHours : Int = 0
-        val amountHourString : String = hourSelectDropdown.onItemSelectedListener.toString()
+        ShowDateLocal.setOnClickListener {
+            val bookingDateDialog = DatePickerDialog(
+                this,
+                DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    localDate.setText("${year}/${month + 1}/${dayOfMonth}")
+                },
+                year,
+                month,
+                day
+            )
+            bookingDateDialog.show()
+        }
+        val hourSelectDropdown: Spinner = findViewById(R.id.hourSelectDropdown)
+        var selectedHours: Int = 0
+        val amountHourString: String = hourSelectDropdown.onItemSelectedListener.toString()
         selectedHours = when (amountHourString) {
             "1" -> 1
             "2" -> 2
@@ -80,32 +81,29 @@ class Table_Booking : AppCompatActivity() {
         place_name.text = placeBook.place_name
         TableOrder.text = placeBook.Table_num.toString()
 
-        Log.d("documentId" , placeBook.id)
+        Log.d("documentId", "55555555555555" + placeBook.id)
 
-        cancelButton.setOnClickListener{
+        //confiram Butt
+        val confirmBth: Button = findViewById(R.id.ConfirmBtn)
+        val cancelBtn: Button = findViewById(R.id.CancelBtn)
+
+        confirmBth.setOnClickListener {
+            // If you're using custom Kotlin objects in Android, add an @ServerTimestamp
+            // annotation to a Date field for your custom object classes. This indicates
+            // that the Date field should be treated as a server timestamp by the object mapper.
+            val docRef = db.collection("Place").document("${placeBook.id}")
+            if (person.text.toString().toInt() <= placeBook.all) {
+                docRef.update("free", person.text.toString().toInt())
+
+            } else {
+                toast("Please enter in range")
+            }
+
+            cancelButton.setOnClickListener {
+
+            }
 
         }
-        confirmButton.setOnClickListener {
-
-        }
-
-
-
-    }
-
-    fun updateData () {
-        // If you're using custom Kotlin objects in Android, add an @ServerTimestamp
-        // annotation to a Date field for your custom object classes. This indicates
-        // that the Date field should be treated as a server timestamp by the object mapper.
-        val docRef = db.collection("Place").document("some-id")
-
-        // Update the timestamp field with the value from the server
-        val updates = hashMapOf<String, Any>(
-            "timestamp" to FieldValue.serverTimestamp()
-        )
-
-        docRef.update(updates).addOnCompleteListener { }
-
     }
     private fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
         val formatter = SimpleDateFormat(format, locale)
