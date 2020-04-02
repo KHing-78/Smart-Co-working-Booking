@@ -17,6 +17,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.onkasem.smartco_workingbooking.DashBoard.Companion.INTENT_PARCELABLE
+import org.jetbrains.anko.toast
 import java.time.LocalDate
 import java.util.*
 
@@ -62,23 +63,31 @@ class Table_Booking : AppCompatActivity() {
         place_name.text = placeBook.place_name
         TableOrder.text = placeBook.Table_num.toString()
 
-        Log.d("documentId" , placeBook.id)
+        Log.d("documentId" ,"55555555555555"+ placeBook.id)
 
-    }
+        //confiram Butt
+        val confirmBth : Button = findViewById(R.id.ConfirmBth)
+        val cancelBtn :Button = findViewById(R.id.CancelBtn)
 
-    fun updateData () {
-        // If you're using custom Kotlin objects in Android, add an @ServerTimestamp
-        // annotation to a Date field for your custom object classes. This indicates
-        // that the Date field should be treated as a server timestamp by the object mapper.
-        val docRef = db.collection("Place").document("some-id")
+        confirmBth.setOnClickListener {
+            // If you're using custom Kotlin objects in Android, add an @ServerTimestamp
+            // annotation to a Date field for your custom object classes. This indicates
+            // that the Date field should be treated as a server timestamp by the object mapper.
+            val docRef = db.collection("Place").document("${placeBook.id}")
+            if (person.text.toString().toInt() <= placeBook.all){
+                docRef.update("free", person.text.toString().toInt())
+                
+            }else {
+                toast("Please enter in range")
+            }
 
-        // Update the timestamp field with the value from the server
-        val updates = hashMapOf<String, Any>(
-            "timestamp" to FieldValue.serverTimestamp()
-        )
+            // Update the timestamp field with the value from the server
+            val updates = hashMapOf<String, Any>(
+                "timestamp" to FieldValue.serverTimestamp()
+            )
 
-        docRef.update(updates).addOnCompleteListener { }
-
+            docRef.update(updates).addOnCompleteListener { }
+        }
     }
 
 }

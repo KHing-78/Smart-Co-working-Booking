@@ -36,6 +36,12 @@ class DashBoard : AppCompatActivity() {
         getData()
         val actionBar = supportActionBar
         actionBar!!.title = "Home"
+        
+    }
+
+    fun pageUpdate(m:ArrayList<Booking>){
+        val placeList = m
+        bAdapter!!.notifyDataSetChanged()
     }
 
     fun getData () {

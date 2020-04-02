@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundRegisterColor"
-    tools:context=".Register">
+    tools:context=".Register"
+    style="@style/AppTheme.NoActionBar"
+    >
 
 
     <TextView
