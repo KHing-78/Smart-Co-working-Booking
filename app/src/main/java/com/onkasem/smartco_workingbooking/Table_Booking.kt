@@ -41,9 +41,6 @@ class Table_Booking : AppCompatActivity() {
         val joinButt: Button = findViewById(R.id.join_switch)
         val time: TimePicker = findViewById(R.id.timePicker1)
 
-        val cancelButton: Button = findViewById(R.id.CancelBtn)
-        val confirmButton: Button = findViewById(R.id.ConfirmBtn)
-
 
         val date = getCurrentDateTime()
         val dateInString = date.toString("yyyy/MM/dd")
@@ -96,8 +93,13 @@ class Table_Booking : AppCompatActivity() {
                     Log.w("TableBooking", "Error adding document", e)
                 }
 
+
             cancelButton.setOnClickListener {
                 toast("Booking is cancel")
+
+            cancelBtn.setOnClickListener {
+
+
             }
 
         }
