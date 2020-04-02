@@ -16,17 +16,21 @@
         <activity
             android:name=".SplashPage"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".MainPage" />
         <activity android:name=".Login" />
         <activity android:name=".Register" />
-        <activity android:name=".DashBoard"></activity>
+        <activity android:name=".BookingDescription">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".DashBoard">
+        </activity>
     </application>
 
 </manifest>
