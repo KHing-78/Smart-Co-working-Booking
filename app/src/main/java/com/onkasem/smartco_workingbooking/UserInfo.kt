@@ -22,7 +22,7 @@ class UserInfo : AppCompatActivity() {
         //displayEmail.text(email)
 
     }
-    private fun getUser(): String? {
+    private fun getUser() {
         var currentUser = mUser.currentUser
         currentUser?.let{
             val userName = currentUser.displayName
