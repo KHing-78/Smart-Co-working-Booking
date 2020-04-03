@@ -9,7 +9,8 @@ data class ShowTime(
     var id: String? = "",
     var uid: String? = "",
     var amountHours: Int = 0,
-    var bookingTime: Timestamp = Timestamp(0,0),
+    var date:String = "",
+    var time: String = "",
     var peopleCount: Int = 0,
     var tableOrder: String = ""
 
