@@ -27,7 +27,6 @@ class Table_Booking : AppCompatActivity() {
         setContentView(R.layout.activity_table__booking)
 
 
-
         val db = FirebaseFirestore.getInstance()
 
         val ShowDateLocal: CardView = findViewById(R.id.ShowDateCard)
@@ -87,8 +86,8 @@ class Table_Booking : AppCompatActivity() {
             // that the Date field should be treated as a server timestamp by the object mapper.
             val docRef = db.collection("Coe_coworking_space")
             docRef.add(addBooking).addOnSuccessListener { documentReference ->
-                    Log.d("TableBooking", "DocumentSnapshot added with ID: " + documentReference.id)
-                }
+                Log.d("TableBooking", "DocumentSnapshot added with ID: " + documentReference.id)
+            }
                 .addOnFailureListener { e ->
                     Log.w("TableBooking", "Error adding document", e)
                 }
@@ -97,21 +96,19 @@ class Table_Booking : AppCompatActivity() {
             cancelButton.setOnClickListener {
                 toast("Booking is cancel")
 
-            cancelBtn.setOnClickListener {
-
 
             }
 
+
         }
-    }
-    private fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
-        val formatter = SimpleDateFormat(format, locale)
-        return formatter.format(this)
-    }
+        fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
+            val formatter = SimpleDateFormat(format, locale)
+            return formatter.format(this)
+        }
 
-    private fun getCurrentDateTime(): Date {
-        return Calendar.getInstance().time
+        fun getCurrentDateTime(): Date {
+            return Calendar.getInstance().time
+        }
+
     }
-
-
 }

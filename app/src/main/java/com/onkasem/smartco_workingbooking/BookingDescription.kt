@@ -1,25 +1,24 @@
 package com.onkasem.smartco_workingbooking
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.transition.Slide
+import android.transition.TransitionManager
 import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_booking_description.*
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import java.util.*
-import kotlin.properties.Delegates
 
 
 class BookingDescription : AppCompatActivity() {
@@ -53,7 +52,7 @@ class BookingDescription : AppCompatActivity() {
         setContentView(R.layout.activity_booking_description)
 
         bookingPlace = findViewById(R.id.bookingPlace)
-        bookingDate = findViewById(R.id.bookingDate)
+        bookingDate = findViewById(R.id.showBookingDate)
         tableNo = findViewById(R.id.tableNo)
         personInReserve = findViewById(R.id.personInReserve)
         qrCodeDescription = findViewById(R.id.qrCode_description)
@@ -85,12 +84,73 @@ class BookingDescription : AppCompatActivity() {
             }
             cancelBookingButton.setOnClickListener {
 
-                qrCodeDescription.visibility = VISIBLE
-                qrCodeScanButton.visibility = VISIBLE
-                mapViewButton.visibility = VISIBLE
-                countDownTime.visibility = GONE
-
                 resetTimer()
+
+                // Initialize a new layout inflater instance
+                val inflater: LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+                // Inflate a custom view using layout inflater
+                val view = inflater.inflate(R.layout.popup_layout,null)
+
+                // Initialize a new instance of popup window
+                val popupWindow = PopupWindow(
+                    view, // Custom view to show in popup window
+                    LinearLayout.LayoutParams.WRAP_CONTENT, // Width of popup window
+                    LinearLayout.LayoutParams.WRAP_CONTENT // Window height
+                )
+
+                // Set an elevation for the popup window
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    popupWindow.elevation = 10.0F
+                }
+
+
+                // If API level 23 or higher then execute the code
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    // Create a new slide animation for popup window enter transition
+                    val slideIn = Slide()
+                    slideIn.slideEdge = Gravity.TOP
+                    popupWindow.enterTransition = slideIn
+
+                    // Slide animation for popup window exit transition
+                    val slideOut = Slide()
+                    slideOut.slideEdge = Gravity.RIGHT
+                    popupWindow.exitTransition = slideOut
+
+                }
+
+                // Get the widgets reference from custom view
+                val cancelButtonPopup = view.findViewById<Button>(R.id.cancel_popup_button)
+                val okButtonPopup = view.findViewById<Button>(R.id.ok_popup_button)
+
+                // Set click listener for popup window's text view
+
+                // Set a click listener for popup's button widget
+                cancelButtonPopup.setOnClickListener{
+                    // Dismiss the popup window
+                    popupWindow.dismiss()
+                }
+                okButtonPopup.setOnClickListener{
+                    // Dismiss the popup window
+                    popupWindow.dismiss()
+                    val myIntent = Intent(baseContext, DashBoard::class.java)
+                    startActivity(myIntent)
+                }
+
+                // Set a dismiss listener for popup window
+                popupWindow.setOnDismissListener {
+                    Toast.makeText(applicationContext,"Popup closed",Toast.LENGTH_SHORT).show()
+                }
+
+
+                // Finally, show the popup window on app
+                TransitionManager.beginDelayedTransition(bookingDescriptionLayout)
+                popupWindow.showAtLocation(
+                    bookingDescriptionLayout, // Location to display popup window
+                    Gravity.CENTER, // Exact position of layout to display popup
+                    0, // X offset
+                    0 // Y offset
+                )
             }
 
 
