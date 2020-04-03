@@ -44,9 +44,6 @@ class Table_Booking : AppCompatActivity() {
         val joinButt: Button = findViewById(R.id.join_switch)
         val time: TimePicker = findViewById(R.id.timePicker1)
 
-        val cancelButton: Button = findViewById(R.id.CancelBtn)
-        val confirmButton: Button = findViewById(R.id.ConfirmBtn)
-
 
         val date = getCurrentDateTime()
         val dateInString = date.toString("yyyy/MM/dd")
@@ -99,6 +96,7 @@ class Table_Booking : AppCompatActivity() {
             var uid : String = ""
             val docRef = db.collection("Coe_coworking_space")
 
+
             val user = FirebaseAuth.getInstance().currentUser
             user?.let {
                 // The user's ID, unique to the Firebase project. Do NOT use this value to
@@ -108,6 +106,15 @@ class Table_Booking : AppCompatActivity() {
                 addBooking.add(addBooks(uid, amountHour,
                     stringTime, "${time.hour}.${time.minute}",person.text.toString().toInt(),placeBook.Table_num.toString()))
                 Log.d("add", addBooking.toString())
+
+
+            cancelButton.setOnClickListener {
+                toast("Booking is cancel")
+
+            cancelBtn.setOnClickListener {
+
+
+
             }
             val updateMap: MutableMap<String, Any> = HashMap()
             updateMap["uid"] = addBooking[0]

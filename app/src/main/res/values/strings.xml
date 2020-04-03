@@ -52,4 +52,6 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+
+    <string name="sign_out">Sign out</string>
 </resources>
