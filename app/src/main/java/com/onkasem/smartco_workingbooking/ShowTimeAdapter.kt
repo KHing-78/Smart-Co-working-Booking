@@ -32,14 +32,7 @@ class ShowTimeAdapter(private val context: Context
         fun bind(showTime: ShowTime) {
             itemView.apply {
                 try{
-                    val timestamp = showTime.bookingTime
-                    val milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000
-                    val sdf = SimpleDateFormat("dd/MM/yyyy")
-                    val netDate = Date(milliseconds)
-                    val date = sdf.format(netDate).toString()
-                    Log.d("TAG170", date)
-
-                    itemView.showBookingDate.text = date
+                    itemView.showBookingDate.text = "date: ${showTime.date} \nTime: ${showTime.time}"
                     itemView.hourBooking.text = showTime.amountHours.toString()
                 } catch (e:Exception){
                     Log.wtf("show", e)
@@ -55,7 +48,6 @@ class ShowTimeAdapter(private val context: Context
     override fun getItemCount() = showList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        showList.sortWith(compareBy({it.bookingTime}, {it.amountHours}))
         Log.d("showList",showList.toString())
         holder.bind(showList[position])
 
