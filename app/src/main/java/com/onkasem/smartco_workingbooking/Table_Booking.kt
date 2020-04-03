@@ -8,18 +8,21 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.fragment.app.FragmentActivity
-import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.Map
+import kotlin.collections.MutableMap
+import kotlin.collections.set
 
 
 class Table_Booking : AppCompatActivity() {
 
     lateinit var db: FirebaseFirestore
-    lateinit var  addBooking: ArrayList<ShowTime>
+    val  addBooking = ArrayList<addBooks>()
+
+    data class addBooks(val uid:String, val amountHours:Int, val date:String, val time: String, val peopleCount: Int, val tableOrder: String)
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,11 +52,17 @@ class Table_Booking : AppCompatActivity() {
         val dateInString = date.toString("yyyy/MM/dd")
         localDate.setText(dateInString)
 
+        var stringTime : String = ""
+
+        var bookingDateDialog : DatePickerDialog
+
         ShowDateLocal.setOnClickListener {
-            val bookingDateDialog = DatePickerDialog(
+                bookingDateDialog = DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                     localDate.setText("${year}/${month + 1}/${dayOfMonth}")
+                    stringTime = "${year}/${month + 1}/${dayOfMonth}"
+                    Log.d("time", stringTime)
                 },
                 year,
                 month,
@@ -61,15 +70,17 @@ class Table_Booking : AppCompatActivity() {
             )
             bookingDateDialog.show()
         }
+
         val hourSelectDropdown: Spinner = findViewById(R.id.hourSelectDropdown)
-        var selectedHours: Int = 0
-        val amountHourString: String = hourSelectDropdown.onItemSelectedListener.toString()
-        selectedHours = when (amountHourString) {
-            "1" -> 1
-            "2" -> 2
-            "3" -> 3
-            else -> 0
-        }
+//        var selectedHours: Int = 0
+//        val amountHourString: String = hourSelectDropdown.onItemSelectedListener.toString()
+//        selectedHours = when (amountHourString) {
+//            "1" -> 1
+//            "2" -> 2
+//            "3" -> 3
+//            else -> 0
+//        }
+        val amountHour = hourSelectDropdown.selectedItem.toString().toInt()
 
         val placeBook = intent.getParcelableExtra<Booking>(DashBoard.INTENT_PARCELABLE)
         val place_name = findViewById<TextView>(R.id.place_name)
@@ -80,28 +91,42 @@ class Table_Booking : AppCompatActivity() {
 
         Log.d("documentId", "55555555555555" + placeBook.id)
 
-//        addBooking.add(ShowTime("","",selectedHours,
-//            Timestamp(year,month),person.text.toString().toInt(),placeBook.Table_num.toString()))
-
         //confiram Butt
         confirmButton.setOnClickListener {
             // If you're using custom Kotlin objects in Android, add an @ServerTimestamp
             // annotation to a Date field for your custom object classes. This indicates
             // that the Date field should be treated as a server timestamp by the object mapper.
+            var uid : String = ""
             val docRef = db.collection("Coe_coworking_space")
-            docRef.add(addBooking).addOnSuccessListener { documentReference ->
-                    Log.d("TableBooking", "DocumentSnapshot added with ID: " + documentReference.id)
-                }
-                .addOnFailureListener { e ->
-                    Log.w("TableBooking", "Error adding document", e)
-                }
 
-            cancelButton.setOnClickListener {
-                toast("Booking is cancel")
+            val user = FirebaseAuth.getInstance().currentUser
+            user?.let {
+                // The user's ID, unique to the Firebase project. Do NOT use this value to
+                // authenticate with your backend server, if you have one. Use
+                // FirebaseUser.getToken() instead.
+                uid = user.uid
+                addBooking.add(addBooks(uid, amountHour,
+                    stringTime, "${time.hour}.${time.minute}",person.text.toString().toInt(),placeBook.Table_num.toString()))
+                Log.d("add", addBooking.toString())
             }
+            val updateMap: MutableMap<String, Any> = HashMap()
+            updateMap["uid"] = addBooking[0]
+            updateMap["amountHours"] = addBooking[1]
+            updateMap["date"] = addBooking[2]
+            updateMap["time"] = addBooking[3]
+            updateMap["peopleCount"] = addBooking[4]
+            updateMap["tableOrder"] = addBooking[5]
 
+            docRef.add(updateMap).addOnSuccessListener { documentReference ->
+                Log.d("TableBooking", "DocumentSnapshot added with ID: " + documentReference.id)
+
+            }
+                .addOnFailureListener { e ->
+                    Log.w("fail", "Error adding document", e)
+                }
         }
     }
+
     private fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
         val formatter = SimpleDateFormat(format, locale)
         return formatter.format(this)
