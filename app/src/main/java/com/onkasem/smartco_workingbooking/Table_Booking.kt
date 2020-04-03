@@ -1,6 +1,7 @@
 package com.onkasem.smartco_workingbooking
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -41,7 +42,6 @@ class Table_Booking : AppCompatActivity() {
         val localDate: TextView = findViewById(R.id.localDate)
 
         val person: EditText = findViewById(R.id.edit_peopleCount)
-        val joinButt: Button = findViewById(R.id.join_switch)
         val time: TimePicker = findViewById(R.id.timePicker1)
 
         val cancelButton: Button = findViewById(R.id.CancelBtn)
@@ -60,8 +60,8 @@ class Table_Booking : AppCompatActivity() {
                 bookingDateDialog = DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                    localDate.setText("${year}/${month + 1}/${dayOfMonth}")
-                    stringTime = "${year}/${month + 1}/${dayOfMonth}"
+                    localDate.setText("${dayOfMonth}/${month + 1}/${year}")
+                    stringTime = "${dayOfMonth}/${month + 1}/${year}"
                     Log.d("time", stringTime)
                 },
                 year,
@@ -71,7 +71,7 @@ class Table_Booking : AppCompatActivity() {
             bookingDateDialog.show()
         }
 
-        val hourSelectDropdown: Spinner = findViewById(R.id.hourSelectDropdown)
+        var hourSelectDropdown: Spinner = findViewById(R.id.hourSelectDropdown)
 //        var selectedHours: Int = 0
 //        val amountHourString: String = hourSelectDropdown.onItemSelectedListener.toString()
 //        selectedHours = when (amountHourString) {
@@ -80,7 +80,8 @@ class Table_Booking : AppCompatActivity() {
 //            "3" -> 3
 //            else -> 0
 //        }
-        val amountHour = hourSelectDropdown.selectedItem.toString().toInt()
+        var amountHour = 0
+        amountHour = hourSelectDropdown.selectedItem.toString().toInt()
 
         val placeBook = intent.getParcelableExtra<Booking>(DashBoard.INTENT_PARCELABLE)
         val place_name = findViewById<TextView>(R.id.place_name)
@@ -110,20 +111,27 @@ class Table_Booking : AppCompatActivity() {
                 Log.d("add", addBooking.toString())
             }
             val updateMap: MutableMap<String, Any> = HashMap()
-            updateMap["uid"] = addBooking[0]
-            updateMap["amountHours"] = addBooking[1]
-            updateMap["date"] = addBooking[2]
-            updateMap["time"] = addBooking[3]
-            updateMap["peopleCount"] = addBooking[4]
-            updateMap["tableOrder"] = addBooking[5]
+            updateMap["uid"] = uid
+            updateMap["amountHours"] = amountHour
+            updateMap["date"] = stringTime
+            updateMap["time"] = "${time.hour}.${time.minute}"
+            updateMap["peopleCount"] = person.text.toString().toInt()
+            updateMap["tableOrder"] = placeBook.Table_num.toString()
+
 
             docRef.add(updateMap).addOnSuccessListener { documentReference ->
                 Log.d("TableBooking", "DocumentSnapshot added with ID: " + documentReference.id)
-
+                val intent = Intent(this, BookingDescription::class.java)
+                startActivity(intent)
             }
                 .addOnFailureListener { e ->
                     Log.w("fail", "Error adding document", e)
                 }
+        }
+
+        cancelButton.setOnClickListener {
+            val intent = Intent(this, DashBoard::class.java)
+            startActivity(intent)
         }
     }
 
