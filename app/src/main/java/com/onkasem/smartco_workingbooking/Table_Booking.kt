@@ -30,7 +30,6 @@ class Table_Booking : AppCompatActivity() {
         setContentView(R.layout.activity_table__booking)
 
 
-
         val db = FirebaseFirestore.getInstance()
 
         val ShowDateLocal: CardView = findViewById(R.id.ShowDateCard)
@@ -96,6 +95,13 @@ class Table_Booking : AppCompatActivity() {
             var uid : String = ""
             val docRef = db.collection("Coe_coworking_space")
 
+            docRef.add(addBooking).addOnSuccessListener { documentReference ->
+                Log.d("TableBooking", "DocumentSnapshot added with ID: " + documentReference.id)
+            }
+                .addOnFailureListener { e ->
+                    Log.w("TableBooking", "Error adding document", e)
+                }
+
 
             val user = FirebaseAuth.getInstance().currentUser
             user?.let {
@@ -108,10 +114,9 @@ class Table_Booking : AppCompatActivity() {
                 Log.d("add", addBooking.toString())
 
 
+
             cancelButton.setOnClickListener {
                 toast("Booking is cancel")
-
-            cancelBtn.setOnClickListener {
 
 
 
@@ -139,9 +144,16 @@ class Table_Booking : AppCompatActivity() {
         return formatter.format(this)
     }
 
-    private fun getCurrentDateTime(): Date {
-        return Calendar.getInstance().time
+
+        }
+        fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
+            val formatter = SimpleDateFormat(format, locale)
+            return formatter.format(this)
+        }
+
+        fun getCurrentDateTime(): Date {
+            return Calendar.getInstance().time
+        }
+
     }
-
-
 }

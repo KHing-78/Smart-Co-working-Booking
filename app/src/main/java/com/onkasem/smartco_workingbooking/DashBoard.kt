@@ -1,19 +1,14 @@
 package com.onkasem.smartco_workingbooking
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_dash_board.*
-import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
-import java.util.concurrent.Delayed
 
 class DashBoard : AppCompatActivity() {
 
@@ -58,6 +53,12 @@ class DashBoard : AppCompatActivity() {
 
         }.addOnFailureListener { task->
             Log.d("testTask", task.message)
+        }
+
+        val viewCurrentBookingBtn: Button = findViewById(R.id.viewCurrentBookingBtn)
+        viewCurrentBookingBtn.setOnClickListener {
+            val myIntent = Intent(baseContext, BookingDescription::class.java)
+            startActivity(myIntent)
         }
         
     }

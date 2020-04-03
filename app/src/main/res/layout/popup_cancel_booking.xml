@@ -1,24 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linear_layout"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#c7bf98"
+    android:background="#BFC2CF"
     android:padding="20dp"
     >
+
     <TextView
-        android:id="@+id/text_view"
+        android:id="@+id/cancel_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Do you wanr to cancel this booking ?"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="20sp"
+        android:text="Cancel your booking?"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        />
-    <Button
-        android:id="@+id/button_popup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cancel_text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Close Me"
-        />
-</LinearLayout>
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:text="Your booking will be  lost after this"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cancel_text" />
+
+    <Button
+        android:id="@+id/cancel_popup_button"
+        android:layout_width="92dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:text="Close"
+        app:layout_constraintEnd_toStartOf="@+id/ok_popup_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cancel_text2"
+        tools:ignore="DuplicateIds" />
+
+    <Button
+        android:id="@+id/ok_popup_button"
+        style="@style/cancelBth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Cancel my booking"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cancel_text2" />
+</androidx.constraintlayout.widget.ConstraintLayout>
